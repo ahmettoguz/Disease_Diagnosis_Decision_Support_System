@@ -4,8 +4,6 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelEncoder
 
-print("\n----")
-
 # Relative file path for dataset
 file_path = './assets/data/Triyaj.xls'
 
@@ -60,12 +58,12 @@ ac_score = accuracy_score(Y_test, Y_prediction) * 100
 # print("Accuracy of prediction is : ", ac_score)
 
 # Get user symptom and create dataframe as similar to used in test and train
-
-user_predictions_list = list()
-user_symptom = "bel ağrısı,ateş"
+multiple_predictons = list()
+user_symptom = "baş ağrısı,ateş,bel ağrısı"
 user_symptoms = user_symptom.split(",")
 
 for symptom in user_symptoms:
+    user_predictions_list = list()
     user_symptom_int = data_set.loc[data_set['BELİRTİ AD']
                                     == symptom, 'BELİRTİ_SAYISAL'].iloc[0]
 
@@ -82,8 +80,30 @@ for symptom in user_symptoms:
         user_prediction = clf_entropy.predict(user_symptom_df)
         user_predictions_list.append(user_prediction[0])
 
-# get unique disease
-user_predictions_list = list(set(user_predictions_list))
+    multiple_predictons.append(user_predictions_list)
+
+
+# get common disease by merging
+merged_list = [item for sublist in multiple_predictons for item in sublist]
+
+# Create a dictionary to store the frequency of elements
+frequency_dict = {}
+for item in merged_list:
+    if item in frequency_dict:
+        frequency_dict[item] += 1
+    else:
+        frequency_dict[item] = 1
+
+# sort frequency dictionary
+sorted_freq = sorted(frequency_dict.items(), key=lambda x: x[1], reverse=True)
+
+# if the number of results is more than expected
+if len(sorted_freq) > 3:
+    result = [item[0] for item in sorted_freq[:3]]
+else:
+    result = [item[0] for item in sorted_freq]
 
 # display result to user
-print("Olası hastalık tanıları : ", user_predictions_list)
+print("\n----")
+print("Olası hastalık tanıları : ", result)
+print("----\n")
