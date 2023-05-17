@@ -60,26 +60,30 @@ ac_score = accuracy_score(Y_test, Y_prediction) * 100
 # print("Accuracy of prediction is : ", ac_score)
 
 # Get user symptom and create dataframe as similar to used in test and train
-user_predictions = list()
-user_symptom = "bel ağrısı"
-user_symptom_int = data_set.loc[data_set['BELİRTİ AD']
-                                == user_symptom, 'BELİRTİ_SAYISAL'].iloc[0]
 
-for i in range(6, 10):
-    user_symptom = {'GÖZLENME SIKLIĞI': [(i / 10)],
-                    'BELİRTİ_SAYISAL': [user_symptom_int],
-                    'BELİRTİ_GÖZLENME': [((i / 10) * user_symptom_int)],
-                    'BELİRTİ_GÖZLENME1': [((i / 10) + user_symptom_int)]
-                    }
+user_predictions_list = list()
+user_symptom = "bel ağrısı,ateş"
+user_symptoms = user_symptom.split(",")
 
-    user_symptom = pd.DataFrame(user_symptom)
+for symptom in user_symptoms:
+    user_symptom_int = data_set.loc[data_set['BELİRTİ AD']
+                                    == symptom, 'BELİRTİ_SAYISAL'].iloc[0]
 
-    # Make prediction for user
-    user_prediction = clf_entropy.predict(user_symptom)
-    user_predictions.append(user_prediction[0])
+    for i in range(7, 10):
+        user_symptom_df = {'GÖZLENME SIKLIĞI': [(i / 10)],
+                           'BELİRTİ_SAYISAL': [user_symptom_int],
+                           'BELİRTİ_GÖZLENME': [((i / 10) * user_symptom_int)],
+                           'BELİRTİ_GÖZLENME1': [((i / 10) + user_symptom_int)]
+                           }
+
+        user_symptom_df = pd.DataFrame(user_symptom_df)
+
+        # Make prediction for user
+        user_prediction = clf_entropy.predict(user_symptom_df)
+        user_predictions_list.append(user_prediction[0])
 
 # get unique disease
-user_predictions = list(set(user_predictions))
+user_predictions_list = list(set(user_predictions_list))
 
 # display result to user
-print("Olası hastalık tanıları : ", user_predictions)
+print("Olası hastalık tanıları : ", user_predictions_list)
