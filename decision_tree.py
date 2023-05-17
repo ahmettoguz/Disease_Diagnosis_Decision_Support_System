@@ -4,6 +4,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelEncoder
 
+print("\n----")
+
 # Relative file path for dataset
 file_path = './assets/data/Triyaj.xls'
 
@@ -55,4 +57,29 @@ Y_prediction = clf_entropy.predict(X_test)
 
 # Display prediction accuracy
 ac_score = accuracy_score(Y_test, Y_prediction) * 100
-print("Accuracy of prediction is : ", ac_score)
+# print("Accuracy of prediction is : ", ac_score)
+
+# Get user symptom and create dataframe as similar to used in test and train
+user_predictions = list()
+user_symptom = "bel ağrısı"
+user_symptom_int = data_set.loc[data_set['BELİRTİ AD']
+                                == user_symptom, 'BELİRTİ_SAYISAL'].iloc[0]
+
+for i in range(6, 10):
+    user_symptom = {'GÖZLENME SIKLIĞI': [(i / 10)],
+                    'BELİRTİ_SAYISAL': [user_symptom_int],
+                    'BELİRTİ_GÖZLENME': [((i / 10) * user_symptom_int)],
+                    'BELİRTİ_GÖZLENME1': [((i / 10) + user_symptom_int)]
+                    }
+
+    user_symptom = pd.DataFrame(user_symptom)
+
+    # Make prediction for user
+    user_prediction = clf_entropy.predict(user_symptom)
+    user_predictions.append(user_prediction[0])
+
+# get unique disease
+user_predictions = list(set(user_predictions))
+
+# display result to user
+print("Olası hastalık tanıları : ", user_predictions)
