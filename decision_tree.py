@@ -117,13 +117,30 @@ def diagnosis():
     else:
         result = [item[0] for item in sorted_freq]
 
-    # Display result to user
-    # print("\n----")
-    # print("Olası hastalık tanıları : ", result)
-    # print("----\n")
+    # Read the XLS file for create relation with other columns
+    clinic_set = pd.read_excel(file_path, sheet_name=2)
+
+    # Use only the first 27 rows
+    clinic_set = clinic_set[:27]
+
+    # Replace unwanted values with "unknown"
+    clinic_set.fillna("belirsiz", inplace=True)
+    clinic_set['CİNS'].replace('e', 'belirsiz', inplace=True)
+    clinic_set['CİNS'].replace('f', 'female', inplace=True)
+    clinic_set['CİNS'].replace('m', 'male', inplace=True)
+
+    # Add other columns
+    detailed_result = {}
+    for i in result:
+        sub_dictionary = {}
+        row = clinic_set[clinic_set['AD'] == i]
+        json_row = {
+            "klinik": row['KLİNİK AD'].iloc[0], "cinsiyet": row['CİNS'].iloc[0], "yaş": row['YAŞ'].iloc[0]}
+
+        detailed_result[i] = json_row
 
     # Return result as json
-    return jsonify({'success': 'true', 'result': result})
+    return jsonify({'success': 'true', 'result': detailed_result})
 
 
 if __name__ == '__main__':
