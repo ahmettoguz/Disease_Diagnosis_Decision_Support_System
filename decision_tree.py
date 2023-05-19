@@ -3,9 +3,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelEncoder
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="assets/html")
 
 
 @app.route('/diagnosis', methods=['GET'])
@@ -141,6 +141,16 @@ def diagnosis():
 
     # Return result as json
     return jsonify({'success': 'true', 'result': detailed_result})
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        # Process the form data here
+        name = request.form['name']
+        age = request.form['age']
+        return f"Name: {name}, Age: {age}"
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
