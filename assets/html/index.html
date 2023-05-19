@@ -12,18 +12,33 @@
       crossorigin="anonymous"
     />
     <title>Hastalık Tanı Destek Sistemi</title>
+    <style>
+      #page_title {
+        box-shadow: 0 10px 15px -15px black;
+      }
+    </style>
   </head>
   <body>
-    <div class="container mt-5">
-      <div class="row">
+    <div class="container">
+      <!-- title -->
+      <div class="row mt-3">
+        <div class="col-6 mx-auto">
+          <h3 id="page_title" class="text-center">
+            Hastalık Tanı Karar Destek Sistemi
+          </h3>
+        </div>
+      </div>
+
+      <!-- input -->
+      <div class="row mt-4">
         <div
-          class="col-4 mx-auto shadow p-3 mb-4 bg-body-tertiary rounded border-start border-primary border-2"
+          class="col-5 mx-auto shadow p-3 mb-4 bg-body-tertiary rounded border-start border-primary border-2"
         >
           <div class="card mx-auto border-primary border-start">
             <div
               class="card-header bg-primary text-white text-center font-weight-bold"
             >
-              <h4 class="mb-0">Hastalık Tanı Sistemi</h4>
+              <h4 class="mb-0">Hasta Şikayeti</h4>
             </div>
             <div class="card-body">
               <form>
@@ -47,8 +62,51 @@
           </div>
         </div>
       </div>
-    </div>
 
+      <!-- output -->
+      <div class="row mt-1">
+        <div
+          class="col-8 mx-auto shadow p-3 mb-4 bg-body-tertiary rounded border-start border-warning border-2"
+        >
+          <div class="card mx-auto border-warning border-start">
+            <div
+              class="card-header bg-primary bg-opacity-10 text-center font-weight-bold"
+            >
+              <h4 class="mb-0">Tanı Önerileri</h4>
+            </div>
+            <div class="card-body">
+              <div class="row justify-content-center">
+                <!-- tanı -->
+                <div class="col-4">
+                  <div class="p-3 border rounded bg-danger bg-opacity-10">
+                    <div class="row">
+                      <div class="col">
+                        <strong>Hastalık İsmi:</strong>
+                        <p>[Hastalık adı]</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <strong>Cinsiyet:</strong>
+                        <p>[Cinsiyet]</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <strong>Yaş:</strong>
+                        <p>[Yaş]</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- tanı end -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- col end -->
+      </div>
+    </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>
