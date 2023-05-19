@@ -126,8 +126,8 @@ def diagnosis():
     # Replace unwanted values with "unknown"
     clinic_set.fillna("belirsiz", inplace=True)
     clinic_set['CİNS'].replace('e', 'belirsiz', inplace=True)
-    clinic_set['CİNS'].replace('f', 'female', inplace=True)
-    clinic_set['CİNS'].replace('m', 'male', inplace=True)
+    clinic_set['CİNS'].replace('f', 'kadın', inplace=True)
+    clinic_set['CİNS'].replace('m', 'erkek', inplace=True)
 
     # Add other columns
     detailed_result = {}
