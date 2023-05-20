@@ -5,7 +5,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelEncoder
 from flask import Flask, request, jsonify, render_template
 
-app = Flask(__name__, template_folder="assets/html")
+app = Flask(__name__, template_folder="assets/html", static_folder="assets")
 
 
 @app.route('/', methods=['GET', 'POST'])
