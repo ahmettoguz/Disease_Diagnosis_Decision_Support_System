@@ -19,3 +19,11 @@ footer a {
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
 }
+
+@media only screen and (max-width: 370px) {
+  footer a {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+  }
+}
