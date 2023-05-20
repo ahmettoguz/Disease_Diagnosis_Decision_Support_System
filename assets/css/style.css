@@ -1,3 +1,13 @@
+body {
+  /* background: linear-gradient(white, rgba(120, 193, 248, 0.285)); */
+  background: radial-gradient(
+    circle at 50% 0%,
+    white 40%,
+    rgba(120, 193, 248, 0.2)
+  );
+  height: 100vh;
+}
+
 #page_title {
   box-shadow: 0 10px 15px -15px black;
 }
