@@ -1,0 +1,21 @@
+#page_title {
+  box-shadow: 0 10px 15px -15px black;
+}
+
+.tooltip-inner {
+  white-space: pre;
+  max-width: none;
+}
+
+footer {
+  font-style: italic;
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(90deg, gray -150%, black 50%, gray 250%);
+  text-align: center;
+}
+
+footer a {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}
