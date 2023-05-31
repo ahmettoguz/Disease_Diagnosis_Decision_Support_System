@@ -72,7 +72,7 @@ def index():
         user_symptom = user_symptom.lower()
 
         try:
-            user_symptoms = user_symptom.split(",")
+            user_symptoms = user_symptom.split(", ")
         except AttributeError:
             detailed_result = {'success': 'invalid symptom'}
             return render_template('index.html', data=detailed_result)
