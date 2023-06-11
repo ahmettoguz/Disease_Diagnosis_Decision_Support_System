@@ -51,3 +51,5 @@ This project is an artificial intelligence application developed using the Pytho
 
 Project idea is belongs to Ersin Aksoy from Innova.
 
+
+
